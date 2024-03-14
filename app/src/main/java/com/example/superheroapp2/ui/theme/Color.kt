@@ -2,6 +2,7 @@ package com.example.superheroapp2.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+
 val md_theme_light_primary = Color(0xFF466800)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFC6F181)
@@ -61,3 +62,4 @@ val md_theme_dark_inversePrimary = Color(0xFF466800)
 val md_theme_dark_surfaceTint = Color(0xFFABD468)
 val md_theme_dark_outlineVariant = Color(0xFF45483D)
 val md_theme_dark_scrim = Color(0xFF000000)
+

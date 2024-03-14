@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,7 +18,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardDefaults.cardColors
 import androidx.compose.material3.CardElevation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -29,7 +32,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.superheroapp2.model.Hero
 import com.example.superheroapp2.ui.theme.SuperHeroApp2Theme
 
@@ -39,11 +45,22 @@ import com.example.superheroapp2.ui.theme.SuperHeroApp2Theme
 
 @Composable
 fun HeroList(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    LazyColumn(modifier) {
+    LazyColumn(
+        modifier = modifier,
+        contentPadding = PaddingValues(
+            start = 16.dp,
+            end = 16.dp,
+            top = 16.dp,
+            bottom = 8.dp
+        ),
+    ) {
         this.items(Hero.heroes) { hero ->
-            HeroListItem(hero)
+            HeroListItem(
+                hero = hero,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
         }
     }
 }
@@ -58,8 +75,8 @@ fun HeroListItem(
     modifier: Modifier = Modifier
 ) {
     Card(
-        elevation = CardDefaults.cardElevation(),
-        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 2.dp),
+        shape = MaterialTheme.shapes.medium,
         modifier = modifier.fillMaxWidth()
     ) {
         Row(modifier = Modifier
@@ -67,7 +84,7 @@ fun HeroListItem(
             .height(72.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column {
+            Column(Modifier.weight(1f)) {
                 Text(
                     text = stringResource(id = hero.name),
                     style = MaterialTheme.typography.displaySmall
@@ -75,15 +92,13 @@ fun HeroListItem(
                 Text(
                     text = stringResource(id = hero.description),
                     style = MaterialTheme.typography.bodyLarge,
-//                    modifier = Modifier.width(200.dp)
+                    lineHeight = 17.sp
                 )
             }
-//            Spacer(modifier = Modifier.weight(1f))
             Box() {
                 Image(
                     painter = painterResource(id = hero.image),
                     modifier = Modifier
-                        .fillMaxSize()
                         .padding(start = 16.dp)
                         .size(72.dp)
                         .clip(RoundedCornerShape(8.dp)),
