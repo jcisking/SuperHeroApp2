@@ -49,13 +49,8 @@ fun HeroList(
 ) {
     LazyColumn(
         modifier = modifier,
-        contentPadding = PaddingValues(
-            start = 16.dp,
-            end = 16.dp,
-            top = 16.dp,
-            bottom = 8.dp
-        ),
     ) {
+        this.item { SuperHeroTopAppBar() }
         this.items(Hero.heroes) { hero ->
             HeroListItem(
                 hero = hero,
@@ -66,7 +61,15 @@ fun HeroList(
 }
 
 
-
+@Composable
+fun SuperHeroTopAppBar() {
+    Row {
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(id = R.string.app_name)
+        )
+    }
+}
 
 
 @Composable
